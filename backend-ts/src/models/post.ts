@@ -9,7 +9,7 @@ interface IPost {
     description: string;
     comments: string[];
     picPath: string;
-    userPicPath: string;
+    userPicturePath: string;
     likes: Map<string, boolean>;
     timestamp: Date;
 }
@@ -22,7 +22,7 @@ const postSchema = new Schema<IPost>({
     location: { type: String },
     description: { type: String, max: 500 },
     picPath: { type: String },
-    userPicPath: { type: String },
+    userPicturePath: { type: String },
     likes: { type: Map, of: Boolean },
     comments: { type: [String], default: [] },
     timestamp: { type: Date, default: Date.now },

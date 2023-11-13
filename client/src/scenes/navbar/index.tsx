@@ -9,6 +9,7 @@ import {
   FormControl,
   useTheme,
   useMediaQuery,
+
 } from "@mui/material";
 import {
   Search,
@@ -24,50 +25,53 @@ import { useDispatch, useSelector } from "react-redux";
 import { setMode, setLogout } from "../../state"
 import { useNavigate } from "react-router-dom";
 import FlexBetween from "../../components/FlexBetween";
+import styles from "./styles";
 
 const Navbar: React.FC = () => {
   const [isMobileMenuToggled, setIsMobileMenuToggled] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((state: any) => state.user);
+  const mode = useSelector((state: any) => state.mode);
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
 
   const theme = useTheme();
   const neutralLight = theme.palette.grey[200];
   const dark = theme.palette.grey[900];
-  const primaryLight = theme.palette.primary.light;
   const alt = theme.palette.background.paper;
 
   const fullName = `${user.firstName} ${user.lastName}`;
 
   return (
     <FlexBetween padding="1rem 6%" backgroundColor={alt}>
-      {/* LOGO */}
       <FlexBetween gap="1.75rem">
         <Typography
-          fontWeight="bold"
-          fontSize="clamp(1rem, 2rem, 2.25rem)"
-          color="primary"
+          fontSize="clamp(1rem, 1.5rem, 2.25rem)"
+          color={mode === "dark" ? "#fff" : "#000"}
           onClick={() => navigate("/home")}
           sx={{
             "&:hover": {
-              color: primaryLight,
               cursor: "pointer",
             },
           }}
         >
-          Socialinteract
+         <Box sx={{ ...styles.box, ...(mode === "dark" && { border: "none", boxShadow: "none" }) }}>
+           Linkto<span style={{color: "#00D5FA"}}>Me</span>
+         </Box>
         </Typography>
         {isNonMobileScreens && (
           <FlexBetween
             backgroundColor={neutralLight}
+            mt="0.7rem"
             borderRadius="9px"
             gap="3rem"
-            padding="0.1rem 1.5rem"
+            padding="0.1rem .8rem"
           >
-            <InputBase placeholder="Search..." />
+            <InputBase placeholder="Search..."
+             inputProps={{ style: { color: "#000" } }}
+             />
             <IconButton>
-              <Search />
+              <Search sx={{ color: "#464646" }} />
             </IconButton>
           </FlexBetween>
         )}
@@ -160,7 +164,21 @@ const Navbar: React.FC = () => {
               )}
             </IconButton>
             <Message sx={{ fontSize: "25px" }} />
-            <Notifications sx={{ fontSize: "25px" }} />
+            <div style={{ position: "relative" }}>
+              <div
+                style={{
+                  position: "absolute",
+                  top: "2rem",
+                  right: "2rem",
+                  width: "3rem",
+                  height: "3rem",
+                  background: "red",
+                  borderRadius: "50%",
+                  color: "#fff",
+                }}
+              ></div>
+              <Notifications sx={{ fontSize: "25px" }} />
+            </div>
             <Help sx={{ fontSize: "25px" }} />
             <FormControl variant="standard" value={fullName}>
               <Select

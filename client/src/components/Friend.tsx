@@ -10,6 +10,7 @@ interface FriendProps {
     friendId: string;
     name: string;
     subtitle: string;
+    picPath?: string;
     userPicturePath?: string;
  }
 
@@ -23,7 +24,7 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }: FriendProps) => {
   const { palette } = useTheme();
   const primaryLight = palette.primary.light;
   const primaryDark = palette.primary.dark;
-  const main = palette.common.white;
+  const main = palette.grey[600];
   const medium = palette.grey[400];
 
   const isFriend = friends.find((friend: any) => friend._id === friendId);
@@ -54,19 +55,19 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }: FriendProps) => {
           }}
         >
           <Typography
-            color={main}
+            color="text.primary"
             variant="h5"
             fontWeight="500"
             sx={{
               "&:hover": {
-                color: palette.primary.light,
+                
                 cursor: "pointer",
               },
             }}
           >
             {name}
           </Typography>
-          <Typography color={medium} fontSize="0.75rem">
+          <Typography color={main} fontSize="0.75rem">
             {subtitle}
           </Typography>
         </Box>

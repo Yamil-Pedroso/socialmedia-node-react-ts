@@ -35,6 +35,7 @@ import {
     const [image, setImage] = useState(null) as any;
     const [post, setPost] = useState("");
     const { palette } = useTheme();
+    const mode = useSelector((state: any) => state.mode);
     const { _id } = useSelector((state: any) => state.user);
     const token = useSelector((state: any) => state.token);
     const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
@@ -72,6 +73,7 @@ import {
             sx={{
               width: "100%",
               backgroundColor: palette.grey[100],
+              color: palette.grey[700],
               borderRadius: "2rem",
               padding: "1rem 2rem",
             }}
@@ -157,18 +159,22 @@ import {
               <MoreHorizOutlined sx={{ color: mediumMain }} />
             </FlexBetween>
           )}
-  
+
+        
           <Button
             disabled={!post}
             onClick={handlePost}
             sx={{
-              color: palette.common.white,
-              backgroundColor: palette.primary.main,
-              borderRadius: "3rem",
+              color: "#3b3b3b",
+              backgroundColor: "#fff",
+              borderRadius: "1rem",
+              border: `2px solid #3b3b3b`,
+              cursor: !post ? "not-allowed" : "pointer",
             }}
           >
             POST
           </Button>
+          
         </FlexBetween>
       </WidgetWrapper>
     );

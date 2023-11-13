@@ -12,6 +12,7 @@ import { useSelector } from "react-redux";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { createTheme } from "@mui/material/styles";
 import { themeSettings } from "./theme";
+import ScrollUpArrow from "./components/ScrollUpArrow";
 
 function App() {
   const mode = useSelector((state: any) => state.mode);
@@ -34,6 +35,7 @@ function App() {
               element={isAuth ? <ProfilePage /> : <Navigate to="/" />}
             />
           </Routes>
+          <ScrollUpArrow />
         </ThemeProvider>
       </Router>
     </div>

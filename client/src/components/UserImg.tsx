@@ -1,12 +1,12 @@
 import { Box } from '@mui/material';
-const imgUrl = 'http://localhost:/assets/';
-console.log(imgUrl);
 interface UserImageProps {
-    picPath: string | undefined;
-    size?: string;
-    }
+  picPath: string | undefined;
+  size?: string;
+}
 
 const UserImg = ({ picPath, size = "60px" }: UserImageProps) => {
+  const imgUrl = `http://localhost:3001/assets/${picPath}`;
+  console.log(imgUrl);
   return (
     <Box width={size} height={size}>
       <img

@@ -12,6 +12,7 @@ const FlexBetween = styled(Box)<FlexBetweenProps>(  // for now we can use it in 
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
+    overflow: 'hidden',
   },
   (props: FlexBetweenProps): CSSObject => ({
     backgroundColor: props.backgroundColor,

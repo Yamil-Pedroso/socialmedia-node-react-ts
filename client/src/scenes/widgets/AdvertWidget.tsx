@@ -24,12 +24,11 @@ const AdvertWidget = () => {
         style={{ borderRadius: "0.75rem", margin: "0.75rem 0" }}
       />
       <FlexBetween>
-        <Typography color={main}>MikaCosmetics</Typography>
-        <Typography color={medium}>mikacosmetics.com</Typography>
+        <Typography color={main}>BookiBooks</Typography>
+        <Typography color={medium}>bookibooks.com</Typography>
       </FlexBetween>
       <Typography color={medium} m="0.5rem 0">
-        Your pathway to stunning and immaculate beauty and made sure your skin
-        is exfoliating skin and shining like light.
+      Visit our bookstore, where each book is an opportunity to embark on a new journey, and where the love for literature is at the heart of everything we do. Come, let the adventure begin!
       </Typography>
     </WidgetWrapper>
   );

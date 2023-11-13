@@ -14,7 +14,7 @@ export const createPost = async (req: Request, res: Response, next: NextFunction
             lastName: user.lastName,
             location: user.location,
             description,
-            userPicPath: user.picPath,
+            userPicturePath: user.picPath,
             picPath,
             likes: {},
             comments: [],

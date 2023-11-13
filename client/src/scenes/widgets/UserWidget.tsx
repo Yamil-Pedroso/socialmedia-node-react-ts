@@ -3,6 +3,9 @@ import {
     EditOutlined,
     LocationOnOutlined,
     WorkOutlineOutlined,
+    GitHub,
+    LinkedIn,
+    Work
   } from "@mui/icons-material";
   import { Box, Typography, Divider, useTheme } from "@mui/material";
   import UserImage from "../../components/UserImg";
@@ -11,7 +14,7 @@ import {
   import { useSelector } from "react-redux";
   import { useEffect, useState } from "react";
   import { useNavigate } from "react-router-dom";
- import images from "../../assets/images";
+  import { Link } from "react-router-dom";
 
   interface UserWidgetProps {
     userId: string | undefined;
@@ -81,11 +84,10 @@ import {
             <Box>
               <Typography
                 variant="h4"
-                color={dark}
+                color={"text.primary"}
                 fontWeight="500"
                 sx={{
                   "&:hover": {
-                    color: palette.primary.light,
                     cursor: "pointer",
                   },
                 }}
@@ -140,24 +142,43 @@ import {
   
           <FlexBetween gap="1rem" mb="0.5rem">
             <FlexBetween gap="1rem">
-              <img src={images.twitter} alt="twitter" width="24px" height="24px" />
+              <GitHub sx={{ color: main, fontSize: "2rem" }} /> 
               <Box>
+                <Link to="https://github.com/Yamil-Pedroso" target="_blank" style={{textDecoration: "none"}}>
                 <Typography color={main} fontWeight="500">
-                  Twitter
+                  Github
                 </Typography>
+                </Link>
                 <Typography color={medium}>Social Network</Typography>
               </Box>
             </FlexBetween>
             <EditOutlined sx={{ color: main }} />
           </FlexBetween>
   
-          <FlexBetween gap="1rem">
+          <FlexBetween gap="1rem" mb="0.5rem">
             <FlexBetween gap="1rem">
-              <img src={images.linkedin} alt="linkedin" width="24px" height="24px" />
+              <LinkedIn sx={{ color: main, fontSize: "2rem" }} />
               <Box>
+              <Link to="https://www.linkedin.com/in/yamil-pedroso/" target="_blank" style={{textDecoration: "none"}}>
                 <Typography color={main} fontWeight="500">
                   Linkedin
                 </Typography>
+                </Link>
+                <Typography color={medium}>Network Platform</Typography>
+              </Box>
+            </FlexBetween>
+            <EditOutlined sx={{ color: main }} />
+          </FlexBetween>
+
+          <FlexBetween gap="1rem" mb="0.5rem">
+            <FlexBetween gap="1rem">
+              <Work sx={{ color: main, fontSize: "2rem" }} />
+              <Box>
+              <Link to="https://www.yamilwebdeveloper.com/" target="_blank" style={{textDecoration: "none"}}>
+                <Typography color={main} fontWeight="500">
+                  Website
+                </Typography>
+                </Link>
                 <Typography color={medium}>Network Platform</Typography>
               </Box>
             </FlexBetween>
