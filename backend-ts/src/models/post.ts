@@ -2,7 +2,7 @@ import { Schema, model, Types } from "mongoose";
 
 interface IPost {
     id: string | null;
-    userId: string;
+    userId: Types.ObjectId;
     firstName: string;
     lastName: string;
     location: string;
@@ -16,7 +16,7 @@ interface IPost {
 
 const postSchema = new Schema<IPost>({
     id: { type: Types.ObjectId },
-    userId: { type: String, required: true },
+    userId: { type: Schema.Types.ObjectId, ref: "User" },
     firstName: { type: String, required: true, min: 2, max: 50 },
     lastName: { type: String, required: true, min: 2, max: 50 },
     location: { type: String },

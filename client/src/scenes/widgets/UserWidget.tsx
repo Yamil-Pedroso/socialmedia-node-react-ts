@@ -27,7 +27,7 @@ import {
     lastName: string;
     location: string;
     occupation: string;
-    userPicturePath: string;
+    userPicturePath?: string;
     viewedProfile: number;
     impressions: number;
     friends: [];
@@ -38,7 +38,6 @@ import {
     const { palette } = useTheme();
     const navigate = useNavigate();
     const token = useSelector((state: any) => state.token);
-    const dark = palette.grey[600];
     const medium = palette.grey[500];
     const main = palette.primary.main;
 

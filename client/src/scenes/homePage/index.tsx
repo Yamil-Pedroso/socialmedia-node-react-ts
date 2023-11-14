@@ -7,7 +7,6 @@ import MyPostWidget from "../../scenes/widgets/MyPostWidget";
 import PostsWidget from "../../scenes/widgets/PostsWidget";
 import AdvertWidget from "../../scenes/widgets/AdvertWidget";
 import FriendListWidget from "../../scenes/widgets/FriendListWidget";
-import MapWidget from "../widgets/MapWidget";
 import 'react-toastify/dist/ReactToastify.css';
 
 const HomePage = () => {
@@ -29,7 +28,6 @@ const HomePage = () => {
       >
         <Box flexBasis={isNonMobileScreens ? "26%" : undefined}>
           <UserWidget userId={_id} picPath={picPath} userPicturePath={""} />
-          <MapWidget />
         </Box>
        
         <Box

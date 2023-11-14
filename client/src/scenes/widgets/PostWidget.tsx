@@ -11,7 +11,6 @@ import {
   import { useState } from "react";
   import { useDispatch, useSelector } from "react-redux";
   import { setPost } from "../../state";
-  import UserImg from "../../components/UserImg";
 
   interface PostWidgetProps {
     postId: string;
@@ -43,7 +42,6 @@ import {
     const loggedInUserId = useSelector((state: any) => state.user._id);
     const isLiked = Boolean(likes[loggedInUserId]);
     const likeCount = Object.keys(likes).length;
-    const friends = useSelector((state: any) => state.user.friends);
   
     const { palette } = useTheme();
     const main = palette.grey[600];

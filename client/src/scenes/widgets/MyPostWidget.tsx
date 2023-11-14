@@ -35,7 +35,6 @@ import {
     const [image, setImage] = useState(null) as any;
     const [post, setPost] = useState("");
     const { palette } = useTheme();
-    const mode = useSelector((state: any) => state.mode);
     const { _id } = useSelector((state: any) => state.user);
     const token = useSelector((state: any) => state.token);
     const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
