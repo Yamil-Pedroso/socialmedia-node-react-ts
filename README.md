@@ -1,1 +1,0 @@
-# socialmedia-node-react-ts
