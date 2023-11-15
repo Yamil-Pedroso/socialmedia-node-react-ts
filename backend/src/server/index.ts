@@ -1,4 +1,4 @@
-import express, { Express } from 'express';
+import express from 'express';
 import { Request, Response } from 'express';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
