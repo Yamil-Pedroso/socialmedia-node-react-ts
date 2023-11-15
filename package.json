@@ -1,0 +1,14 @@
+{
+  "name": "socialmedia-node-react-ts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run start-backend && npm run start-frontend",
+    "start-backend": "cd backend && npm start",
+    "start-frontend": "cd client && npm start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
