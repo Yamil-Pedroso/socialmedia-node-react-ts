@@ -16,7 +16,7 @@
     "typescript": "^5.2.2"
   },
   "scripts": {
-    "start": "nodemon src/server/index.ts",
+    "start": "node src/server/index.ts",
     "dev": "nodemon src/server/index.ts"
   },
   "dependencies": {
