@@ -4,11 +4,15 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "start": "npm run start-backend && npm run start-frontend",
+    "build": "tsc -p backend/tsconfig.json && cd client && npm run build",
+    "start": "npm run build && npm run start-backend && npm run start-frontend",
     "start-backend": "cd backend && npm start",
     "start-frontend": "cd client && npm start"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "ts-node": "^10.9.1"
+  }
 }
