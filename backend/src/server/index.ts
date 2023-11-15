@@ -15,7 +15,7 @@ import auth from '../routes/auth';
 import userRoutes from '../routes/users';
 import postRoutes from '../routes/posts';
 import { createPost } from '../controllers/postController';
-import { registerUser } from '../controllers/authController';   
+import { registerUser } from '../controllers/authController';
 import { verifyToken } from '../middlewares/auth';
 import cloudinary from 'cloudinary';
 import User from '../models/user';
@@ -28,7 +28,7 @@ dotenv.config({ path: '../src/config/config.env' });
 //const __dirname = path.dirname(__filename);
 
 // MongoDB Connection
-const port = process.env.PORT || 5000;
+const port = 3001;
 connectDB();
 
 const app = express();
@@ -118,6 +118,3 @@ app.listen(port, () => {
     //User.insertMany(users);
     //Post.insertMany(posts);
 });
-
-
-
