@@ -2,7 +2,7 @@
   "name": "socialmedia-node-react-ts",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "start": "npm run start-backend && npm run start-frontend",
     "start-backend": "cd backend && npm start",
