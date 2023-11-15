@@ -17,7 +17,8 @@
   },
   "scripts": {
     "start": "node src/server/index.ts",
-    "dev": "nodemon src/server/index.ts"
+    "dev": "nodemon src/server/index.ts",
+     "build": "webpack"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
