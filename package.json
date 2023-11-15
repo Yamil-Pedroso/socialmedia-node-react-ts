@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "build": "tsc -p backend/tsconfig.json && cd client && npm run build",
-    "start": "npm run build && npm run start-backend && npm run start-frontend",
+    "start": "npm run start-backend && npm run start-frontend",
     "start-backend": "cd backend && npm start",
     "start-frontend": "cd client && npm start"
   },
