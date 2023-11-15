@@ -28,7 +28,7 @@ dotenv.config({ path: '../src/config/config.env' });
 //const __dirname = path.dirname(__filename);
 
 // MongoDB Connection
-const port = 3001;
+const PORT = process.env.PORT || 5000;
 connectDB();
 
 const app = express();
@@ -111,8 +111,8 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 
-app.listen(port, () => {
-    console.log(`Server started on port ${port}`);
+app.listen(PORT, () => {
+    console.log(`Server started on port ${PORT}`);
 
     // Seed database one time
     //User.insertMany(users);
