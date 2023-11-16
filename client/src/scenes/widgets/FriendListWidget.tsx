@@ -1,35 +1,35 @@
-import { Box, Typography, useTheme } from "@mui/material";
-import Friend from "../../components/Friend";
-import WidgetWrapper from "../../components/WidgetWrapper";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { setFriends } from "../../state";
+import { Box, Typography, useTheme } from '@mui/material'
+import Friend from '../../components/Friend'
+import WidgetWrapper from '../../components/WidgetWrapper'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { setFriends } from '../../state'
 
 interface FriendListWidgetProps {
-    userId: string;
+  userId: string
 }
 
 const FriendListWidget = ({ userId }: FriendListWidgetProps) => {
-  const dispatch = useDispatch();
-  const { palette } = useTheme();
-  const token = useSelector((state: any) => state.token);
-  const friends = useSelector((state: any) => state.user.friends);
+  const dispatch = useDispatch()
+  const { palette } = useTheme()
+  const token = useSelector((state: any) => state.token)
+  const friends = useSelector((state: any) => state.user.friends)
 
   const getFriends = async () => {
     const response = await fetch(
-      `http://localhost:3001/api/v1/users/${userId}/friends`,
+      `https://linkto-me.onrender.com/api/v1/users/${userId}/friends`,
       {
-        method: "GET",
+        method: 'GET',
         headers: { Authorization: `Bearer ${token}` },
-      }
-    );
-    const data = await response.json();
-    dispatch(setFriends({ friends: data }));
-  };
+      },
+    )
+    const data = await response.json()
+    dispatch(setFriends({ friends: data }))
+  }
 
   useEffect(() => {
-    getFriends();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    getFriends()
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <WidgetWrapper>
@@ -37,7 +37,7 @@ const FriendListWidget = ({ userId }: FriendListWidgetProps) => {
         color={palette.grey[600]}
         variant="h5"
         fontWeight="500"
-        sx={{ mb: "1.5rem" }}
+        sx={{ mb: '1.5rem' }}
       >
         Friend List
       </Typography>
@@ -53,7 +53,7 @@ const FriendListWidget = ({ userId }: FriendListWidgetProps) => {
         ))}
       </Box>
     </WidgetWrapper>
-  );
-};
+  )
+}
 
-export default FriendListWidget;
+export default FriendListWidget

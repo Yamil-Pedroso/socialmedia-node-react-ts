@@ -95,7 +95,7 @@ const Form = () => {
 
     try {
       const savedUserResponse = await fetch(
-        'http://localhost:3001/api/v1/auth/register',
+        'https://linkto-me.onrender.com/api/v1/auth/register',
         {
           method: 'POST',
           body: formData,
@@ -123,7 +123,7 @@ const Form = () => {
 
   const login = async (values: any, onSubmitProps: any) => {
     const loggedInResponse = await fetch(
-      'http://localhost:3001/api/v1/auth/login',
+      'https://linkto-me.onrender.com/api/v1/auth/login',
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

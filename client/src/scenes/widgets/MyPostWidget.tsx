@@ -50,11 +50,14 @@ const MyPostWidget = ({ picPath }: MyPostWidgetProps) => {
       formData.append('picPath', image.name)
     }
 
-    const response = await fetch(`http://localhost:3001/api/v1/posts`, {
-      method: 'POST',
-      headers: { Authorization: `Bearer ${token}` },
-      body: formData,
-    })
+    const response = await fetch(
+      `https://linkto-me.onrender.com/api/v1/posts`,
+      {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${token}` },
+        body: formData,
+      },
+    )
     const posts = await response.json()
     dispatch(setPosts({ posts }))
     setImage(null)
