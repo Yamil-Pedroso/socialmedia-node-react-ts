@@ -9,19 +9,19 @@ import PostsWidget from '../../scenes/widgets/PostsWidget'
 import UserWidget from '../../scenes/widgets/UserWidget'
 
 const ProfilePage = () => {
+  const renderProxy = 'https://linkto-me.onrender.com'
+  //const localhostProxy = 'http://localhost:3001'
+
   const [user, setUser] = useState(null) as any
   const { userId } = useParams() as any
   const token = useSelector((state: any) => state.token)
   const isNonMobileScreens = useMediaQuery('(min-width:1000px)')
 
   const getUser = async () => {
-    const response = await fetch(
-      `https://linkto-me.onrender.com/api/v1/users/${userId}`,
-      {
-        method: 'GET',
-        headers: { Authorization: `Bearer ${token}` },
-      },
-    )
+    const response = await fetch(`${renderProxy}/api/v1/users/${userId}`, {
+      method: 'GET',
+      headers: { Authorization: `Bearer ${token}` },
+    })
     const data = await response.json()
     setUser(data)
   }

@@ -1,8 +1,12 @@
 import { Typography, useTheme } from '@mui/material'
 import FlexBetween from '../../components/FlexBetween'
 import WidgetWrapper from '../../components/WidgetWrapper'
+import Carousel from '../../components/Carousel'
 
 const AdvertWidget = () => {
+  const renderProxy = 'https://linkto-me.onrender.com'
+  //const localhostProxy = 'http://localhost:3001'
+
   const { palette } = useTheme()
   const dark = palette.grey[600]
   const main = palette.primary.main
@@ -16,11 +20,12 @@ const AdvertWidget = () => {
         </Typography>
         <Typography color={medium}>Create Ad</Typography>
       </FlexBetween>
+      <Carousel />
       <img
         width="100%"
         height="auto"
         alt="advert"
-        src="https://linkto-me.onrender.com/assets/info4.jpeg"
+        src={`${renderProxy}/assets/info4.jpeg`}
         style={{ borderRadius: '0.75rem', margin: '0.75rem 0' }}
       />
       <FlexBetween>

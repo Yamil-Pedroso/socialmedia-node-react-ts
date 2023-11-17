@@ -15,6 +15,9 @@ interface FriendProps {
 }
 
 const Friend = ({ friendId, name, subtitle, userPicturePath }: FriendProps) => {
+  const renderProxy = 'https://linkto-me.onrender.com'
+  //const localhostProxy = 'http://localhost:3001'
+
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { _id } = useSelector((state: any) => state.user)
@@ -30,7 +33,7 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }: FriendProps) => {
 
   const patchFriend = async () => {
     const response = await fetch(
-      `https://linkto-me.onrender.com/api/v1/users/${_id}/${friendId}`,
+      `${renderProxy}/api/v1/users/${_id}/${friendId}`,
       {
         method: 'PATCH',
         headers: {

@@ -22,30 +22,27 @@ interface Post {
 }
 
 const PostsWidget = ({ userId, isProfile = false }: PostsWidgetProps) => {
+  const renderProxy = 'https://linkto-me.onrender.com'
+  //const localhostProxy = 'http://localhost:3001'
+
   const dispatch = useDispatch()
   const posts = useSelector((state: any) => state.posts)
   const token = useSelector((state: any) => state.token)
 
   const getPosts = async () => {
-    const response = await fetch(
-      'https://linkto-me.onrender.com/api/v1/posts',
-      {
-        method: 'GET',
-        headers: { Authorization: `Bearer ${token}` },
-      },
-    )
+    const response = await fetch(`${renderProxy}/api/v1/posts`, {
+      method: 'GET',
+      headers: { Authorization: `Bearer ${token}` },
+    })
     const data = await response.json()
     dispatch(setPosts({ posts: data }))
   }
 
   const getUserPosts = async () => {
-    const response = await fetch(
-      `https://linkto-me.onrender.com/posts/${userId}/posts`,
-      {
-        method: 'GET',
-        headers: { Authorization: `Bearer ${token}` },
-      },
-    )
+    const response = await fetch(`${renderProxy}/posts/${userId}/posts`, {
+      method: 'GET',
+      headers: { Authorization: `Bearer ${token}` },
+    })
     const data = await response.json()
     dispatch(setPosts({ posts: data }))
   }

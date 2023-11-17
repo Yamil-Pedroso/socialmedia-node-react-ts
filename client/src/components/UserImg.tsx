@@ -5,8 +5,9 @@ interface UserImageProps {
 }
 
 const UserImg = ({ picPath, size = '60px' }: UserImageProps) => {
-  const imgUrl = `https://linkto-me.onrender.com/assets/${picPath}`
-  console.log(imgUrl)
+  const renderProxy = 'https://linkto-me.onrender.com'
+  //const localhostProxy = 'http://localhost:3001'
+
   return (
     <Box width={size} height={size}>
       <img
@@ -14,7 +15,7 @@ const UserImg = ({ picPath, size = '60px' }: UserImageProps) => {
         width={size}
         height={size}
         alt="user"
-        src={`https://linkto-me.onrender.com/assets/${picPath}`}
+        src={`${renderProxy}/assets/${picPath}`}
       />
     </Box>
   )

@@ -107,6 +107,7 @@ const Navbar: React.FC = () => {
                 '& .MuiSvgIcon-root': {
                   pr: '0.25rem',
                   width: '3rem',
+                  color: `${mode && '#5f5f5f'}`,
                 },
                 '& .MuiSelect-select:focus': {
                   backgroundColor: neutralLight,
@@ -115,7 +116,7 @@ const Navbar: React.FC = () => {
               input={<InputBase />}
             >
               <MenuItem value={fullName}>
-                <Typography sx={{ fontWeight: 'bold', color: '#656565' }}>
+                <Typography sx={{ fontWeight: 'bold', color: '#949393' }}>
                   {fullName}
                 </Typography>
               </MenuItem>

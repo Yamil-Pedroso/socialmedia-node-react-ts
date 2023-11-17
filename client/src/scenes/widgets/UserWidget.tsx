@@ -34,6 +34,9 @@ interface User {
 }
 
 const UserWidget = ({ userId, picPath }: UserWidgetProps) => {
+  const renderProxy = 'https://linkto-me.onrender.com'
+  //const localhostProxy = 'http://localhost:3001'
+
   const [user, setUser] = useState(null)
   const { palette } = useTheme()
   const navigate = useNavigate()
@@ -43,13 +46,10 @@ const UserWidget = ({ userId, picPath }: UserWidgetProps) => {
 
   console.log('picPath: ', picPath)
   const getUser = async () => {
-    const response = await fetch(
-      `https://linkto-me.onrender.com/api/v1/users/${userId}`,
-      {
-        method: 'GET',
-        headers: { Authorization: `Bearer ${token}` },
-      },
-    )
+    const response = await fetch(`${renderProxy}/api/v1/users/${userId}`, {
+      method: 'GET',
+      headers: { Authorization: `Bearer ${token}` },
+    })
     const data = await response.json()
     setUser(data)
     console.log(data)

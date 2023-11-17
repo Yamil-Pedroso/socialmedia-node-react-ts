@@ -30,11 +30,15 @@ interface MyPostWidgetProps {
 }
 
 const MyPostWidget = ({ picPath }: MyPostWidgetProps) => {
+  const renderProxy = 'https://linkto-me.onrender.com'
+  //const localhostProxy = 'http://localhost:3001'
+
   const dispatch = useDispatch()
   const [isImage, setIsImage] = useState(false)
   const [image, setImage] = useState(null) as any
   const [post, setPost] = useState('')
   const { palette } = useTheme()
+  const mode = useSelector((state: any) => state.mode)
   const { _id } = useSelector((state: any) => state.user)
   const token = useSelector((state: any) => state.token)
   const isNonMobileScreens = useMediaQuery('(min-width: 1000px)')
@@ -50,14 +54,11 @@ const MyPostWidget = ({ picPath }: MyPostWidgetProps) => {
       formData.append('picPath', image.name)
     }
 
-    const response = await fetch(
-      `https://linkto-me.onrender.com/api/v1/posts`,
-      {
-        method: 'POST',
-        headers: { Authorization: `Bearer ${token}` },
-        body: formData,
-      },
-    )
+    const response = await fetch(`${renderProxy}/api/v1/posts`, {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${token}` },
+      body: formData,
+    })
     const posts = await response.json()
     dispatch(setPosts({ posts }))
     setImage(null)
@@ -161,19 +162,35 @@ const MyPostWidget = ({ picPath }: MyPostWidgetProps) => {
           </FlexBetween>
         )}
 
-        <Button
-          disabled={!post}
-          onClick={handlePost}
-          sx={{
-            color: '#3b3b3b',
-            backgroundColor: '#fff',
-            borderRadius: '1rem',
-            border: `2px solid #3b3b3b`,
-            cursor: !post ? 'not-allowed' : 'pointer',
-          }}
-        >
-          POST
-        </Button>
+        {mode === 'light' ? (
+          <Button
+            disabled={!post}
+            onClick={handlePost}
+            sx={{
+              color: '#00D5FA',
+              backgroundColor: '#fff',
+              borderRadius: '1rem',
+              border: `2px solid #3b3b3b`,
+              cursor: !post ? 'not-allowed' : 'pointer',
+            }}
+          >
+            POST
+          </Button>
+        ) : (
+          <Button
+            disabled={!post}
+            onClick={handlePost}
+            sx={{
+              color: '#00D5FA',
+              backgroundColor: '#3b3b3b',
+              borderRadius: '1rem',
+              border: `2px solid #3b3b3b`,
+              cursor: !post ? 'not-allowed' : 'pointer',
+            }}
+          >
+            POST
+          </Button>
+        )}
       </FlexBetween>
     </WidgetWrapper>
   )
