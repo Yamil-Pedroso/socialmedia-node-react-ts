@@ -30,8 +30,8 @@ interface MyPostWidgetProps {
 }
 
 const MyPostWidget = ({ picPath }: MyPostWidgetProps) => {
-  const renderProxy = 'https://linkto-me.onrender.com'
-  //const localhostProxy = 'http://localhost:3001'
+  //const renderProxy = 'https://linkto-me.onrender.com'
+  const localhostProxy = 'http://localhost:3001'
 
   const dispatch = useDispatch()
   const [isImage, setIsImage] = useState(false)
@@ -54,7 +54,7 @@ const MyPostWidget = ({ picPath }: MyPostWidgetProps) => {
       formData.append('picPath', image.name)
     }
 
-    const response = await fetch(`${renderProxy}/api/v1/posts`, {
+    const response = await fetch(`${localhostProxy}/api/v1/posts`, {
       method: 'POST',
       headers: { Authorization: `Bearer ${token}` },
       body: formData,

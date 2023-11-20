@@ -77,8 +77,8 @@ const initialValuesLogin: InitialValuesLogin = {
 }
 
 const Form = () => {
-  const renderProxy = 'https://linkto-me.onrender.com'
-  //const localhostProxy = 'http://localhost:3001'
+  //const renderProxy = 'https://linkto-me.onrender.com'
+  const localhostProxy = 'http://localhost:3001'
 
   const [pageType, setPageType] = useState('login')
   const { palette } = useTheme()
@@ -98,7 +98,7 @@ const Form = () => {
 
     try {
       const savedUserResponse = await fetch(
-        `${renderProxy}/api/v1/auth/register`,
+        `${localhostProxy}/api/v1/auth/register`,
         {
           method: 'POST',
           body: formData,
@@ -125,11 +125,14 @@ const Form = () => {
   }
 
   const login = async (values: any, onSubmitProps: any) => {
-    const loggedInResponse = await fetch(`${renderProxy}/api/v1/auth/login`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(values),
-    })
+    const loggedInResponse = await fetch(
+      `${localhostProxy}/api/v1/auth/login`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(values),
+      },
+    )
     const loggedIn = await loggedInResponse.json()
     onSubmitProps.resetForm()
     if (loggedIn) {

@@ -35,8 +35,8 @@ const PostWidget = ({
   likes,
   comments,
 }: PostWidgetProps) => {
-  const renderProxy = 'https://linkto-me.onrender.com'
-  //const localhostProxy = 'http://localhost:3001'
+  //const renderProxy = 'https://linkto-me.onrender.com'
+  const localhostProxy = 'http://localhost:3001'
 
   const [isComments, setIsComments] = useState(false)
   const dispatch = useDispatch()
@@ -50,14 +50,17 @@ const PostWidget = ({
   const primary = palette.primary.main
 
   const patchLike = async () => {
-    const response = await fetch(`${renderProxy}/api/v1/posts/${postId}/like`, {
-      method: 'PATCH',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
+    const response = await fetch(
+      `${localhostProxy}/api/v1/posts/${postId}/like`,
+      {
+        method: 'PATCH',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userId: loggedInUserId }),
       },
-      body: JSON.stringify({ userId: loggedInUserId }),
-    })
+    )
     const updatedPost = await response.json()
     dispatch(setPost({ post: updatedPost }))
   }
@@ -79,7 +82,7 @@ const PostWidget = ({
           height="auto"
           alt="post"
           style={{ borderRadius: '0.75rem', marginTop: '0.75rem' }}
-          src={`${renderProxy}/assets/${picPath}`}
+          src={`${localhostProxy}/assets/${picPath}`}
         />
       )}
       <FlexBetween mt="0.25rem">

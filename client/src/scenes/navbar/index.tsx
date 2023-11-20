@@ -11,7 +11,6 @@ import {
   useMediaQuery,
 } from '@mui/material'
 import {
-  Search,
   Message,
   DarkMode,
   LightMode,
@@ -25,6 +24,7 @@ import { setMode, setLogout } from '../../state'
 import { useNavigate } from 'react-router-dom'
 import FlexBetween from '../../components/FlexBetween'
 import styles from './styles'
+import SearchFunc from '../../components/search/Search'
 
 const Navbar: React.FC = () => {
   const [isMobileMenuToggled, setIsMobileMenuToggled] = useState(false)
@@ -63,23 +63,7 @@ const Navbar: React.FC = () => {
             Linkto<span style={{ color: '#00D5FA' }}>Me</span>
           </Box>
         </Typography>
-        {isNonMobileScreens && (
-          <FlexBetween
-            backgroundColor={neutralLight}
-            mt="0.7rem"
-            borderRadius="9px"
-            gap="3rem"
-            padding="0.1rem .8rem"
-          >
-            <InputBase
-              placeholder="Search..."
-              inputProps={{ style: { color: '#000' } }}
-            />
-            <IconButton>
-              <Search sx={{ color: '#464646' }} />
-            </IconButton>
-          </FlexBetween>
-        )}
+        {isNonMobileScreens && <SearchFunc />}
       </FlexBetween>
 
       {/* DESKTOP NAV */}

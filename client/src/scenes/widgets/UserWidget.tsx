@@ -34,8 +34,8 @@ interface User {
 }
 
 const UserWidget = ({ userId, picPath }: UserWidgetProps) => {
-  const renderProxy = 'https://linkto-me.onrender.com'
-  //const localhostProxy = 'http://localhost:3001'
+  //const renderProxy = 'https://linkto-me.onrender.com'
+  const localhostProxy = 'http://localhost:3001'
 
   const [user, setUser] = useState(null)
   const { palette } = useTheme()
@@ -46,7 +46,7 @@ const UserWidget = ({ userId, picPath }: UserWidgetProps) => {
 
   console.log('picPath: ', picPath)
   const getUser = async () => {
-    const response = await fetch(`${renderProxy}/api/v1/users/${userId}`, {
+    const response = await fetch(`${localhostProxy}/api/v1/users/${userId}`, {
       method: 'GET',
       headers: { Authorization: `Bearer ${token}` },
     })
