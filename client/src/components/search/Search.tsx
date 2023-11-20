@@ -128,7 +128,7 @@ const SearchFunc: React.FC<BoxProps> = ({ active }) => {
       padding="0.1rem .8rem"
     >
       <InputBase
-        placeholder="Search..."
+        placeholder="Search a friend..."
         inputProps={{ style: { color: '#000' } }}
         value={findUser}
         onChange={handleOnChange}
