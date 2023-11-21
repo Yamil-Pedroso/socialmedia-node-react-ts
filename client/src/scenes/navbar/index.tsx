@@ -10,6 +10,7 @@ import {
   useTheme,
   useMediaQuery,
 } from '@mui/material'
+
 import {
   Message,
   DarkMode,
@@ -19,20 +20,30 @@ import {
   Menu,
   Close,
 } from '@mui/icons-material'
+
+import Tooltip from '@mui/material/Tooltip'
+
 import { useDispatch, useSelector } from 'react-redux'
 import { setMode, setLogout } from '../../state'
 import { useNavigate } from 'react-router-dom'
 import FlexBetween from '../../components/FlexBetween'
 import styles from './styles'
+import './styles.css'
 import SearchFunc from '../../components/search/Search'
 
-const Navbar: React.FC = () => {
+interface NavbarProps {
+  closeDropdowns: () => void
+}
+
+const Navbar: React.FC<NavbarProps> = ({ closeDropdowns }) => {
   const [isMobileMenuToggled, setIsMobileMenuToggled] = useState(false)
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const user = useSelector((state: any) => state.user)
   const mode = useSelector((state: any) => state.mode)
   const isNonMobileScreens = useMediaQuery('(min-width: 1000px)')
+  const [isToggledNotis, setIsToggledNotis] = useState(false)
+  const [isToggledFAQ, setIsToggledFAQ] = useState(false)
 
   const theme = useTheme()
   const neutralLight = theme.palette.grey[200]
@@ -40,6 +51,16 @@ const Navbar: React.FC = () => {
   const alt = theme.palette.background.paper
 
   const fullName = `${user.firstName} ${user.lastName}`
+
+  const handleClickFAQ = () => {
+    setIsToggledFAQ(!isToggledFAQ)
+    setIsToggledNotis(false)
+  }
+
+  const handleClickNotis = () => {
+    setIsToggledNotis(!isToggledNotis)
+    setIsToggledFAQ(false)
+  }
 
   return (
     <FlexBetween padding="1rem 6%" backgroundColor={alt}>
@@ -63,7 +84,9 @@ const Navbar: React.FC = () => {
             Linkto<span style={{ color: '#00D5FA' }}>Me</span>
           </Box>
         </Typography>
-        {isNonMobileScreens && <SearchFunc />}
+        {isNonMobileScreens && (
+          <SearchFunc active={false} closeDropdowns={closeDropdowns} />
+        )}
       </FlexBetween>
 
       {/* DESKTOP NAV */}
@@ -76,9 +99,48 @@ const Navbar: React.FC = () => {
               <LightMode sx={{ color: dark, fontSize: '25px' }} />
             )}
           </IconButton>
-          <Message sx={{ fontSize: '25px' }} />
-          <Notifications sx={{ fontSize: '25px' }} />
-          <Help sx={{ fontSize: '25px' }} />
+
+          <div className="notification-wrapper">
+            <Tooltip title="Notis" placement="top-start">
+              <Notifications
+                sx={{
+                  fontSize: '25px',
+                  cursor: 'pointer',
+                }}
+                onClick={handleClickNotis}
+              />
+            </Tooltip>
+            <div
+              style={{
+                position: 'absolute',
+                top: '-.4rem',
+                right: '-.2rem',
+                width: '1rem',
+                height: '1rem',
+                background: '#03d5fa',
+                borderRadius: '50%',
+                color: '#fff',
+              }}
+            ></div>
+            {isToggledNotis && (
+              <div className="notification-dropdown">
+                <p>Contenido del dropdown</p>
+              </div>
+            )}
+          </div>
+          <div className="faq-wrapper">
+            <Tooltip title="FAQ" placement="top-start">
+              <Help
+                sx={{ fontSize: '25px', cursor: 'pointer' }}
+                onClick={handleClickFAQ}
+              />
+            </Tooltip>
+            {isToggledFAQ && (
+              <div className="faq-dropdown">
+                <p>Contenido del dropdown</p>
+              </div>
+            )}
+          </div>
           <FormControl variant="standard">
             <Select
               value={fullName}

@@ -7,13 +7,11 @@ import {
   ListItem,
   ListItemText,
   useTheme,
-  Box,
 } from '@mui/material'
 import { Search, Close } from '@mui/icons-material'
 import FlexBetween from '../FlexBetween'
 import { useSelector } from 'react-redux'
 import 'react-toastify/dist/ReactToastify.css'
-import styles from './styles'
 import './style.css'
 import axios from 'axios'
 import UserImg from '../UserImg'
@@ -30,7 +28,11 @@ interface BoxProps {
   active: boolean
 }
 
-const SearchFunc: React.FC<BoxProps> = ({ active }) => {
+interface SearchFuncProps extends BoxProps {
+  closeDropdowns: () => void
+}
+
+const SearchFunc: React.FC<SearchFuncProps> = ({ closeDropdowns, active }) => {
   const localhostProxy = 'http://localhost:3001/api/v1/users'
   const [findUser, setFindUser] = useState('')
   const myUser = useSelector((state: any) => state.user)
@@ -38,9 +40,6 @@ const SearchFunc: React.FC<BoxProps> = ({ active }) => {
   const [filteredUsers, setFilteredUsers] = useState<UserProps[]>([])
   const [selectedUser, setSelectedUser] = useState<UserProps | null>(null)
   const [showBox, setShowBox] = useState(false)
-  const friends = useSelector((state: any) => state.user.friends)
-  console.log(friends.map((friend: any) => friend._id))
-  console.log(selectedUser?.picPath)
 
   const theme = useTheme()
   const neutralLight = theme.palette.grey[200]
@@ -77,18 +76,29 @@ const SearchFunc: React.FC<BoxProps> = ({ active }) => {
     setFilteredUsers(filtered)
   }, [findUser, users])
 
+  useEffect(() => {
+    // Ajusta la animación cuando cambia el estado de showBox
+    const box = document.querySelector('.box') as HTMLDivElement
+    if (box) {
+      box.style.animation = showBox
+        ? 'slide-in 1s ease-in-out forwards'
+        : 'slide-out 1s ease-in-out forwards'
+    }
+  }, [showBox])
+
   const handleOnChange = (e: any) => {
     e.preventDefault()
     setFindUser(e.target.value)
-    setShowBox(false) // Hide the Box when input changes
+    setShowBox(false)
   }
 
   const handleOnSubmit = (e: any) => {
     e.preventDefault()
     if (selectedUser) {
-      setShowBox(true) // Set the state to show the Box
+      setShowBox(true)
     } else {
-      setShowBox(false) // Set the state to hide the Box
+      setShowBox(false)
+      closeDropdowns()
     }
   }
 
@@ -112,13 +122,6 @@ const SearchFunc: React.FC<BoxProps> = ({ active }) => {
       document.removeEventListener('click', handleClickOutside)
     }
   }, [])
-
-  const imageStyle = {
-    borderRadius: '50%',
-    width: '100px',
-    height: '100px',
-    objectFit: 'cover',
-  }
 
   return (
     <FlexBetween
@@ -156,27 +159,61 @@ const SearchFunc: React.FC<BoxProps> = ({ active }) => {
           <div className="box-content">
             {selectedUser && (
               <>
-                {selectedUser.firstName} {selectedUser.lastName} <br />
-                {selectedUser.occupation} <br />
-                {selectedUser.email} <br />
                 {selectedUser && (
-                  <UserImg
-                    picPath={selectedUser.picPath}
-                    size="200px"
-                    borderRadius="none"
-                  />
+                  <div className="box-img">
+                    <div
+                      style={{
+                        position: 'absolute',
+                        top: '-50px',
+                        right: '-5rem',
+                        borderRadius: '50%',
+                        overflow: 'hidden',
+                      }}
+                    >
+                      <UserImg
+                        picPath={selectedUser.picPath}
+                        size="380px"
+                        borderRadius="50%"
+                        style={{
+                          width: '100%',
+                          height: '100%',
+                          objectFit: 'cover',
+                          position: 'relative',
+                          border: '5px solid #fff',
+                        }}
+                      />
+                      <div
+                        style={{
+                          position: 'absolute',
+                          top: 0,
+                          right: 0,
+                          bottom: 0,
+                          left: 0,
+                          background: `linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.3))`,
+                          borderRadius: '50%',
+                        }}
+                      />
+                    </div>
+                  </div>
                 )}
+                <div className="user-info-wrapper">
+                  <p>
+                    {selectedUser.firstName} {selectedUser.lastName}
+                  </p>{' '}
+                  <br />
+                  <p>{selectedUser.occupation} </p>
+                  <br />
+                  <p>{selectedUser.email} </p>
+                  <br />
+                </div>
               </>
             )}
-            <IconButton
+
+            <Close
               onClick={() => setShowBox(false)}
-              className="close-wrapper"
-            >
-              <Close
-                style={{ transition: 'all 0.3s ease' }}
-                className="close-icon"
-              />
-            </IconButton>
+              style={{ transition: 'all 0.3s ease' }}
+              className="close-icon"
+            />
           </div>
         </div>
       )}

@@ -1,0 +1,44 @@
+.box {
+    border: 2px solid black;
+    padding: 2px;
+    margin: 2px;
+    box-shadow: 5px 5px 0px 0px rgba(0, 0, 0, 0.9);
+    border-radius: 5px;
+    transition: box-shadow 0.3s ease-in-out;
+
+    &:hover {
+      box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.9);
+    }
+  }
+
+  .notification-wrapper {
+    position: relative;
+  }
+
+  .notification-dropdown {
+    position: absolute;
+    top: 1.8rem;
+    right: 0;
+    background-color: #fff;
+    padding: 5rem 10rem;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    transition: max-height 0.3s ease-in-out;
+    z-index: 999;
+  }
+
+  .faq-wrapper {
+    position: relative;
+  }
+
+  .faq-dropdown {
+    position: absolute;
+    top: 1.8rem;
+    right: 0;
+    background-color: #fff;
+    padding: 5rem 10rem;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    transition: max-height 0.3s ease-in-out;
+    z-index: 999;
+  }

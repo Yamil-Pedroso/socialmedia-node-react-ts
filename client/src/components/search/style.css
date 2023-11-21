@@ -1,20 +1,49 @@
-
 .box {
-    height: 100vh;
-    width: 25rem;
-    background-color: #fff;
-    z-index: 2;
+  height: 58vh;
+  width: 25rem;
+  background-color: #006af7;
+  z-index: 999;
+  position: fixed;
+  top: 0rem;
+  right: 0rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  border: none;
+  border-radius: 0 0 0 1rem;
+  animation: slide-out 1s ease-in-out forwards;
+}
+
+@keyframes slide-out {
+  from {
+    right: -100%;
+  }
+  to {
+    right: 0;
+  }
+}
+
+.box.active {
+  animation: slide-in 1s ease-in-out forwards;
+}
+
+@keyframes slide-in {
+  from {
+    right: 0;
+  }
+  to {
+    right: 0;
+  }
+}
+
+
+
+  .box-img-overlay img {
     position: absolute;
     top: 0;
-    right: 0;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    transition: transform 1s ease-in-out;
-    transform: translateX(100%);
-
-    &.active {
-        transform: translateX(0);
-    }
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.5);
   }
 
   .box-content {
@@ -25,10 +54,33 @@
     justify-content: space-between;
 }
 
+.user-info-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-top: 8rem;
+}
+
+.user-info-wrapper > p {
+  margin-bottom: -1rem;
+  color: #ededed;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.user-info-wrapper p:first-child {
+  font-size: 2.5rem;
+  z-index: 2;
+}
+
 .close-icon {
     position: absolute;
-    top: 0rem;
-    right: 1rem;
+    top: 1rem;
+    left: 1rem;
     cursor: pointer;
     z-index: 3;
+    color: #ededed;
   }
+
+.close-icon:hover {
+  transform: rotate(90deg) scale(2);
+}

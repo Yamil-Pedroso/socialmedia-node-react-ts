@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react'
 import {
   ManageAccountsOutlined,
   EditOutlined,
@@ -7,12 +8,11 @@ import {
   LinkedIn,
   Work,
 } from '@mui/icons-material'
-import { Box, Typography, Divider, useTheme } from '@mui/material'
+import { Box, Typography, Divider, useTheme, TextField } from '@mui/material'
 import UserImage from '../../components/UserImg'
 import FlexBetween from '../../components/FlexBetween'
 import WidgetWrapper from '../../components/WidgetWrapper'
 import { useSelector } from 'react-redux'
-import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 
@@ -34,8 +34,11 @@ interface User {
 }
 
 const UserWidget = ({ userId, picPath }: UserWidgetProps) => {
-  //const renderProxy = 'https://linkto-me.onrender.com'
   const localhostProxy = 'http://localhost:3001'
+
+  const [isEditing, setIsEditing] = useState(false)
+  const [editedValue, setEditedValue] = useState('')
+  const [originalValue, setOriginalValue] = useState('')
 
   const [user, setUser] = useState(null)
   const { palette } = useTheme()
@@ -44,7 +47,6 @@ const UserWidget = ({ userId, picPath }: UserWidgetProps) => {
   const medium = palette.grey[500]
   const main = palette.primary.main
 
-  console.log('picPath: ', picPath)
   const getUser = async () => {
     const response = await fetch(`${localhostProxy}/api/v1/users/${userId}`, {
       method: 'GET',
@@ -52,17 +54,36 @@ const UserWidget = ({ userId, picPath }: UserWidgetProps) => {
     })
     const data = await response.json()
     setUser(data)
-    console.log(data)
+    setOriginalValue(data.firstName) // Inicializar el valor original con el nombre del usuario
+    setEditedValue(data.firstName) // Inicializar el valor editado con el nombre del usuario
   }
 
   useEffect(() => {
     getUser()
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
-  if (!user) {
-    return null
+  const handleEditClick = () => {
+    setIsEditing(!isEditing)
   }
 
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setEditedValue(event.target.value)
+  }
+
+  const handleEditComplete = () => {
+    // Simulación de la lógica de guardar en el servidor
+    if (originalValue !== editedValue) {
+      // Aquí puedes implementar la lógica para guardar en el servidor
+      console.log('Guardando en el servidor:', editedValue)
+    }
+
+    setIsEditing(false)
+  }
+
+  if (!user) {
+    // Manejo del caso cuando user es null o undefined
+    return null // o puedes mostrar un mensaje de error, etc.
+  }
   const {
     firstName,
     lastName,
@@ -94,7 +115,21 @@ const UserWidget = ({ userId, picPath }: UserWidgetProps) => {
                 },
               }}
             >
-              {firstName} {lastName}
+              {isEditing ? (
+                <TextField
+                  value={editedValue}
+                  onChange={handleInputChange}
+                  onBlur={handleEditComplete}
+                  fullWidth
+                  InputProps={{
+                    style: { color: 'transparent', borderBottom: 'none' },
+                  }}
+                />
+              ) : (
+                <>
+                  {firstName} {lastName}
+                </>
+              )}
             </Typography>
             <Typography color={medium}>{friends.length} friends</Typography>
           </Box>
@@ -142,61 +177,100 @@ const UserWidget = ({ userId, picPath }: UserWidgetProps) => {
           Social Profiles
         </Typography>
 
+        {/* GitHub */}
         <FlexBetween gap="1rem" mb="0.5rem">
           <FlexBetween gap="1rem">
             <GitHub sx={{ color: main, fontSize: '2rem' }} />
             <Box>
-              <Link
-                to="https://github.com/Yamil-Pedroso"
-                target="_blank"
-                style={{ textDecoration: 'none' }}
-              >
-                <Typography color={main} fontWeight="500">
-                  Github
-                </Typography>
-              </Link>
+              {isEditing ? (
+                <TextField
+                  value={editedValue}
+                  onChange={handleInputChange}
+                  onBlur={handleEditComplete}
+                  fullWidth
+                  InputProps={{
+                    style: { color: 'transparent', borderBottom: 'none' },
+                  }}
+                />
+              ) : (
+                <Link
+                  to="https://github.com/Yamil-Pedroso"
+                  target="_blank"
+                  style={{ textDecoration: 'none' }}
+                >
+                  <Typography color={main} fontWeight="500">
+                    Github
+                  </Typography>
+                </Link>
+              )}
               <Typography color={medium}>Social Network</Typography>
             </Box>
           </FlexBetween>
-          <EditOutlined sx={{ color: main }} />
+          <EditOutlined sx={{ color: main }} onClick={handleEditClick} />
         </FlexBetween>
 
+        {/* LinkedIn */}
         <FlexBetween gap="1rem" mb="0.5rem">
           <FlexBetween gap="1rem">
             <LinkedIn sx={{ color: main, fontSize: '2rem' }} />
             <Box>
-              <Link
-                to="https://www.linkedin.com/in/yamil-pedroso/"
-                target="_blank"
-                style={{ textDecoration: 'none' }}
-              >
-                <Typography color={main} fontWeight="500">
-                  Linkedin
-                </Typography>
-              </Link>
+              {isEditing ? (
+                <TextField
+                  value={editedValue}
+                  onChange={handleInputChange}
+                  onBlur={handleEditComplete}
+                  fullWidth
+                  InputProps={{
+                    style: { color: 'transparent', borderBottom: 'none' },
+                  }}
+                />
+              ) : (
+                <Link
+                  to="https://www.linkedin.com/in/yamil-pedroso/"
+                  target="_blank"
+                  style={{ textDecoration: 'none' }}
+                >
+                  <Typography color={main} fontWeight="500">
+                    Linkedin
+                  </Typography>
+                </Link>
+              )}
               <Typography color={medium}>Network Platform</Typography>
             </Box>
           </FlexBetween>
-          <EditOutlined sx={{ color: main }} />
+          <EditOutlined sx={{ color: main }} onClick={handleEditClick} />
         </FlexBetween>
 
+        {/* Website */}
         <FlexBetween gap="1rem" mb="0.5rem">
           <FlexBetween gap="1rem">
             <Work sx={{ color: main, fontSize: '2rem' }} />
             <Box>
-              <Link
-                to="https://www.yamilwebdeveloper.com/"
-                target="_blank"
-                style={{ textDecoration: 'none' }}
-              >
-                <Typography color={main} fontWeight="500">
-                  Website
-                </Typography>
-              </Link>
+              {isEditing ? (
+                <TextField
+                  value={editedValue}
+                  onChange={handleInputChange}
+                  onBlur={handleEditComplete}
+                  fullWidth
+                  InputProps={{
+                    style: { color: 'transparent', borderBottom: 'none' },
+                  }}
+                />
+              ) : (
+                <Link
+                  to="https://www.yamilwebdeveloper.com/"
+                  target="_blank"
+                  style={{ textDecoration: 'none' }}
+                >
+                  <Typography color={main} fontWeight="500">
+                    Website
+                  </Typography>
+                </Link>
+              )}
               <Typography color={medium}>Network Platform</Typography>
             </Box>
           </FlexBetween>
-          <EditOutlined sx={{ color: main }} />
+          <EditOutlined sx={{ color: main }} onClick={handleEditClick} />
         </FlexBetween>
       </Box>
     </WidgetWrapper>
