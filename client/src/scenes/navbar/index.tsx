@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import {
   Box,
   IconButton,
@@ -19,6 +19,7 @@ import {
   Help,
   Menu,
   Close,
+  NotificationsOffRounded,
 } from '@mui/icons-material'
 
 import Tooltip from '@mui/material/Tooltip'
@@ -30,8 +31,15 @@ import FlexBetween from '../../components/FlexBetween'
 import styles from './styles'
 import './styles.css'
 import SearchFunc from '../../components/search/Search'
+import MyAccordion from '../../components/Accordion'
 
-interface NavbarProps {
+interface Notification {
+  id: number
+  title: string
+  description: string
+  date: string
+}
+interface NavbarProps extends Notification {
   closeDropdowns: () => void
 }
 
@@ -44,6 +52,73 @@ const Navbar: React.FC<NavbarProps> = ({ closeDropdowns }) => {
   const isNonMobileScreens = useMediaQuery('(min-width: 1000px)')
   const [isToggledNotis, setIsToggledNotis] = useState(false)
   const [isToggledFAQ, setIsToggledFAQ] = useState(false)
+  const [deletedNotifications, setDeletedNotifications] = useState<number[]>([])
+  const [notiCounter, setNotiCounter] = useState<number>(0)
+
+  //console.log('User friends: ', user.friends)
+  //console.log('User posts: ', posts)
+  //console.log('User likes in posts: ', posts[0].likes)
+
+  const myNotifications = useMemo(
+    () => [
+      {
+        id: 1,
+        title: 'Notificación 1',
+        description: 'Descripción de la notificación 1',
+        date: '2023-10-10',
+      },
+      {
+        id: 2,
+        title: 'Notificación 2',
+        description: 'Descripción de la notificación 2',
+        date: '2023-10-10',
+      },
+      {
+        id: 3,
+        title: 'Notificación 3',
+        description: 'Descripción de la notificación 3',
+        date: '2023-10-10',
+      },
+      {
+        id: 4,
+        title: 'Notificación 4',
+        description: 'Descripción de la notificación 4',
+        date: '2023-10-10',
+      },
+      {
+        id: 5,
+        title: 'Notificación 5',
+        description: 'Descripción de la notificación 5',
+        date: '2023-10-10',
+      },
+      {
+        id: 6,
+        title: 'Notificación 6',
+        description: 'Descripción de la notificación 6',
+        date: '2023-10-10',
+      },
+      {
+        id: 7,
+        title: 'Notificación 7',
+        description: 'Descripción de la notificación 7',
+        date: '2023-10-10',
+      },
+      {
+        id: 8,
+        title: 'Notificación 8',
+        description: 'Descripción de la notificación 8',
+        date: '2023-10-10',
+      },
+    ],
+    [],
+  )
+
+  const handleClickCloseNotis = (notificationId: number) => {
+    setDeletedNotifications((prevDeletedNotifications) => [
+      ...prevDeletedNotifications,
+      notificationId,
+    ])
+  }
 
   const theme = useTheme()
   const neutralLight = theme.palette.grey[200]
@@ -61,6 +136,13 @@ const Navbar: React.FC<NavbarProps> = ({ closeDropdowns }) => {
     setIsToggledNotis(!isToggledNotis)
     setIsToggledFAQ(false)
   }
+
+  useEffect(() => {
+    const remainingNotifications = myNotifications.filter(
+      (noti) => !deletedNotifications.includes(noti.id),
+    )
+    setNotiCounter(remainingNotifications.length)
+  }, [deletedNotifications, myNotifications])
 
   return (
     <FlexBetween padding="1rem 6%" backgroundColor={alt}>
@@ -104,27 +186,103 @@ const Navbar: React.FC<NavbarProps> = ({ closeDropdowns }) => {
             <Tooltip title="Notis" placement="top-start">
               <Notifications
                 sx={{
+                  ...(mode === 'dark' && { color: '#fff' }),
                   fontSize: '25px',
-                  cursor: 'pointer',
                 }}
                 onClick={handleClickNotis}
               />
             </Tooltip>
-            <div
-              style={{
-                position: 'absolute',
-                top: '-.4rem',
-                right: '-.2rem',
-                width: '1rem',
-                height: '1rem',
-                background: '#03d5fa',
-                borderRadius: '50%',
-                color: '#fff',
-              }}
-            ></div>
+
+            {myNotifications && (
+              <>
+                <div
+                  style={{
+                    position: 'absolute',
+                    top: '-.4rem',
+                    right: '-.2rem',
+                    width: '1.2rem',
+                    height: '1.2rem',
+                    background: '#03d5fa',
+                    borderRadius: '50%',
+                    color: '#fff',
+                  }}
+                >
+                  <div className="notification-counter">
+                    <Typography
+                      sx={{
+                        fontWeight: 'bold',
+                        fontSize: '0.75rem',
+                        color: '#fff',
+                      }}
+                    >
+                      {notiCounter}
+                    </Typography>
+                  </div>
+                </div>
+              </>
+            )}
+
             {isToggledNotis && (
               <div className="notification-dropdown">
-                <p>Contenido del dropdown</p>
+                {isToggledNotis && (
+                  <div className="notification-dropdown">
+                    {deletedNotifications.length === myNotifications.length ? (
+                      <div className="notifications-off-wrapper">
+                        <Typography
+                          sx={{
+                            fontWeight: 'bold',
+                            color: '#949393',
+                            p: '1rem',
+                          }}
+                        >
+                          There are no notifications
+                          <NotificationsOffRounded
+                            sx={{ fontSize: '25px', marginLeft: '1rem' }}
+                          />
+                        </Typography>
+                      </div>
+                    ) : (
+                      myNotifications
+                        .filter(
+                          (noti) => !deletedNotifications.includes(noti.id),
+                        )
+                        .map((noti) => (
+                          <div
+                            key={noti.id}
+                            style={{
+                              display: 'flex',
+                              gap: '0.5rem',
+                              justifyContent: 'space-between',
+                              alignItems: 'center',
+                              padding: '1rem',
+                              borderBottom: '1px solid #d5d5d5',
+                            }}
+                          >
+                            <div className="notifications-wrapper">
+                              <Typography
+                                variant="subtitle1"
+                                sx={{ fontWeight: 'bold' }}
+                              >
+                                {noti.title}
+                              </Typography>
+
+                              <Typography variant="body2">
+                                {noti.description}
+                              </Typography>
+                              <Typography variant="caption">
+                                {noti.date}
+                              </Typography>
+                            </div>
+                            <div className="close-icon-wrapper">
+                              <Close
+                                onClick={() => handleClickCloseNotis(noti.id)}
+                              />
+                            </div>
+                          </div>
+                        ))
+                    )}
+                  </div>
+                )}
               </div>
             )}
           </div>
@@ -137,7 +295,7 @@ const Navbar: React.FC<NavbarProps> = ({ closeDropdowns }) => {
             </Tooltip>
             {isToggledFAQ && (
               <div className="faq-dropdown">
-                <p>Contenido del dropdown</p>
+                <MyAccordion />
               </div>
             )}
           </div>

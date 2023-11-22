@@ -1,5 +1,4 @@
 .box {
-    border: 2px solid black;
     padding: 2px;
     margin: 2px;
     box-shadow: 5px 5px 0px 0px rgba(0, 0, 0, 0.9);
@@ -13,6 +12,7 @@
 
   .notification-wrapper {
     position: relative;
+    color: #000;
   }
 
   .notification-dropdown {
@@ -20,7 +20,7 @@
     top: 1.8rem;
     right: 0;
     background-color: #fff;
-    padding: 5rem 10rem;
+    width: 25rem;
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
     border-radius: 4px;
     transition: max-height 0.3s ease-in-out;
@@ -35,10 +35,25 @@
     position: absolute;
     top: 1.8rem;
     right: 0;
-    background-color: #fff;
-    padding: 5rem 10rem;
+    background-color: #2ad7fa;
+    width: 25rem;
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
     border-radius: 4px;
     transition: max-height 0.3s ease-in-out;
     z-index: 999;
+  }
+
+  .close-icon-wrapper {
+    cursor: pointer;
+  }
+
+  .notification-counter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .notifications-off-wrapper {
+    display: flex;
+    justify-content: center;
   }

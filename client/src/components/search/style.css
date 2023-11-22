@@ -1,14 +1,15 @@
 .box {
   height: 58vh;
   width: 25rem;
-  background-color: #006af7;
-  z-index: 999;
+  background-color: #FED63C;
+  z-index: 1000;
   position: fixed;
   top: 0rem;
   right: 0rem;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  border: none;
+  border: 1px solid #0a2342;
+  box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.8);
   border-radius: 0 0 0 1rem;
   animation: slide-out 1s ease-in-out forwards;
 }
@@ -36,14 +37,12 @@
 }
 
 
-
   .box-img-overlay img {
     position: absolute;
     top: 0;
     left: 0;
     width: 50%;
     height: 100%;
-    background: rgba(255, 255, 255, 0.5);
   }
 
   .box-content {
@@ -62,7 +61,7 @@
 
 .user-info-wrapper > p {
   margin-bottom: -1rem;
-  color: #ededed;
+  color: #0a2342;
   font-weight: 600;
   font-size: 1rem;
 }
@@ -78,7 +77,7 @@
     left: 1rem;
     cursor: pointer;
     z-index: 3;
-    color: #ededed;
+    color: #0a2342;
   }
 
 .close-icon:hover {

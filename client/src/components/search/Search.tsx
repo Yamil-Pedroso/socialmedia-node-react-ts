@@ -179,7 +179,6 @@ const SearchFunc: React.FC<SearchFuncProps> = ({ closeDropdowns, active }) => {
                           height: '100%',
                           objectFit: 'cover',
                           position: 'relative',
-                          border: '5px solid #fff',
                         }}
                       />
                       <div
