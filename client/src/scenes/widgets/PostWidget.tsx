@@ -35,8 +35,8 @@ const PostWidget = ({
   likes,
   comments,
 }: PostWidgetProps) => {
-  //const renderProxy = 'https://linkto-me.onrender.com'
-  const localhostProxy = 'http://localhost:3001'
+  const renderProxy = 'https://linkto-me.onrender.com'
+  //const localhostProxy = 'http://localhost:3001'
 
   const [isComments, setIsComments] = useState(false)
   const dispatch = useDispatch()
@@ -51,7 +51,7 @@ const PostWidget = ({
 
   const patchLike = async () => {
     const response = await fetch(
-      `${localhostProxy}/api/v1/posts/${postId}/like`,
+      `${renderProxy}/api/v1/posts/${postId}/like`,
       {
         method: 'PATCH',
         headers: {
@@ -82,7 +82,7 @@ const PostWidget = ({
           height="auto"
           alt="post"
           style={{ borderRadius: '0.75rem', marginTop: '0.75rem' }}
-          src={`${localhostProxy}/assets/${picPath}`}
+          src={`${renderProxy}/assets/${picPath}`}
         />
       )}
       <FlexBetween mt="0.25rem">

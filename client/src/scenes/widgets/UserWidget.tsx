@@ -34,7 +34,8 @@ interface User {
 }
 
 const UserWidget = ({ userId, picPath }: UserWidgetProps) => {
-  const localhostProxy = 'http://localhost:3001'
+  //const localhostProxy = 'http://localhost:3001'
+  const renderProxy = 'https://linkto-me.onrender.com'
 
   const [isEditing, setIsEditing] = useState(false)
   const [editedValue, setEditedValue] = useState('')
@@ -48,7 +49,7 @@ const UserWidget = ({ userId, picPath }: UserWidgetProps) => {
   const main = palette.primary.main
 
   const getUser = async () => {
-    const response = await fetch(`${localhostProxy}/api/v1/users/${userId}`, {
+    const response = await fetch(`${renderProxy}/api/v1/users/${userId}`, {
       method: 'GET',
       headers: { Authorization: `Bearer ${token}` },
     })

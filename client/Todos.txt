@@ -1,0 +1,24 @@
+#Todos
+
+Navbar features:
+  [] - Search functionality
+  [] - Texts
+  [] - Notifications
+  [] - FAQ
+
+UserWidget features:
+  [] - Edit User SocialNetworks
+
+UserPostWidget features to posted:
+  [] - Clip functionality
+  [] - Attachment functionality
+  [] - Audio functionality
+
+PostWidget features:
+  [] - Comment a post functionality
+  [] - Share Post(Whatsapp, Gmail)
+  [] - Delete Post
+
+Authentication features:
+  [] - Forget password
+

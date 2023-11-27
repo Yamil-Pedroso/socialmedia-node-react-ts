@@ -12,8 +12,8 @@ const UserImg = ({
   borderRadius,
   style,
 }: UserImageProps) => {
-  //const renderProxy = 'https://linkto-me.onrender.com'
-  const localhostProxy = 'http://localhost:3001'
+  const renderProxy = 'https://linkto-me.onrender.com'
+  //const localhostProxy = 'http://localhost:3001'
 
   return (
     <Box width={size} height={size} style={style}>
@@ -23,7 +23,7 @@ const UserImg = ({
         width={size}
         height={size}
         alt="user"
-        src={`${localhostProxy}/assets/${picPath}`}
+        src={`${renderProxy}/assets/${picPath}`}
       />
     </Box>
   )

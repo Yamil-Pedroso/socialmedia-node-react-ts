@@ -9,8 +9,8 @@ import PostsWidget from '../../scenes/widgets/PostsWidget'
 import UserWidget from '../../scenes/widgets/UserWidget'
 
 const ProfilePage = () => {
-  //const renderProxy = 'https://linkto-me.onrender.com'
-  const localhostProxy = 'http://localhost:3001'
+  const renderProxy = 'https://linkto-me.onrender.com'
+  //const localhostProxy = 'http://localhost:3001'
 
   const [user, setUser] = useState(null) as any
   const { userId } = useParams() as any
@@ -18,7 +18,7 @@ const ProfilePage = () => {
   const isNonMobileScreens = useMediaQuery('(min-width:1000px)')
 
   const getUser = async () => {
-    const response = await fetch(`${localhostProxy}/api/v1/users/${userId}`, {
+    const response = await fetch(`${renderProxy}/api/v1/users/${userId}`, {
       method: 'GET',
       headers: { Authorization: `Bearer ${token}` },
     })
@@ -34,7 +34,9 @@ const ProfilePage = () => {
 
   return (
     <Box>
-      <Navbar />
+      <Navbar closeDropdowns={function (): void {
+        throw new Error('Function not implemented.')
+      } } id={0} title={''} description={''} date={''} />
       <Box
         width="100%"
         padding="2rem 6%"

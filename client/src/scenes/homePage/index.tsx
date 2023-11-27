@@ -7,6 +7,7 @@ import MyPostWidget from "../../scenes/widgets/MyPostWidget";
 import PostsWidget from "../../scenes/widgets/PostsWidget";
 import AdvertWidget from "../../scenes/widgets/AdvertWidget";
 import FriendListWidget from "../../scenes/widgets/FriendListWidget";
+import MyChat from "../../components/my-chat/MyChat";
 import 'react-toastify/dist/ReactToastify.css';
 
 const HomePage = () => {
@@ -18,7 +19,9 @@ const HomePage = () => {
 
   return (
     <Box>
-      <Navbar />
+      <Navbar closeDropdowns={function (): void {
+        throw new Error("Function not implemented.");
+      } } id={0} title={""} description={""} date={""} />
       <Box
         width="100%"
         padding="2rem 6%"
@@ -28,6 +31,7 @@ const HomePage = () => {
       >
         <Box flexBasis={isNonMobileScreens ? "26%" : undefined}>
           <UserWidget userId={_id} picPath={picPath} userPicturePath={""} />
+          <MyChat />
         </Box>
        
         <Box

@@ -33,7 +33,8 @@ interface SearchFuncProps extends BoxProps {
 }
 
 const SearchFunc: React.FC<SearchFuncProps> = ({ closeDropdowns, active }) => {
-  const localhostProxy = 'http://localhost:3001/api/v1/users'
+  //const localhostProxy = 'http://localhost:3001/api/v1/users'
+  const renderProxy = 'https://linkto-me.onrender.com/api/v1/users'
   const [findUser, setFindUser] = useState('')
   const myUser = useSelector((state: any) => state.user)
   const [users, setUsers] = useState<UserProps[]>([])
@@ -46,7 +47,7 @@ const SearchFunc: React.FC<SearchFuncProps> = ({ closeDropdowns, active }) => {
 
   useEffect(() => {
     axios
-      .get(localhostProxy, {
+      .get(renderProxy, {
         headers: {
           Authorization: `Bearer ${myUser.token}`,
         },

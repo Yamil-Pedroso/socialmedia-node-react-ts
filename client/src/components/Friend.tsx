@@ -15,8 +15,8 @@ interface FriendProps {
 }
 
 const Friend = ({ friendId, name, subtitle, userPicturePath }: FriendProps) => {
-  //const renderProxy = 'https://linkto-me.onrender.com'
-  const localhostProxy = 'http://localhost:3001'
+  const renderProxy = 'https://linkto-me.onrender.com'
+  //const localhostProxy = 'http://localhost:3001'
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -33,7 +33,7 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }: FriendProps) => {
 
   const patchFriend = async () => {
     const response = await fetch(
-      `${localhostProxy}/api/v1/users/${_id}/${friendId}`,
+      `${renderProxy}/api/v1/users/${_id}/${friendId}`,
       {
         method: 'PATCH',
         headers: {
